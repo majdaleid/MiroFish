@@ -10,10 +10,10 @@ html[dir="rtl"] :is(p, h1, h2, h3, h4, h5, textarea, .message-text, .result-answ
 }
 /* User input follows its own language, independently of the output language. */
 textarea { unicode-bidi: plaintext; }
-:is(bdi, code, pre, .nav-brand, .version-text, .model-badge, .file-name, .step-num) {
+:is(bdi, code, pre, .nav-brand, .version-text, .model-badge, .file-name, .step-num, .card-id, .report-id, .card-date, .card-time, .modal-id, .modal-create-time) {
   unicode-bidi: isolate;
 }
-:is(code, pre, .nav-brand, .version-text, .model-badge, .file-name, .step-num) {
+:is(code, pre, .nav-brand, .version-text, .model-badge, .file-name, .step-num, .card-id, .report-id, .card-date, .card-time, .modal-id, .modal-create-time) {
   direction: ltr;
 }
 :is(code, pre) { text-align: left; }

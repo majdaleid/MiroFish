@@ -6,10 +6,9 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import Mock
 
-import pytest
 from flask import Flask
 from app.services.report_agent import ReportAgent, ReportOutline, ReportSection
-from app.utils.locale import get_language_instruction, set_locale, t
+from app.utils.locale import set_locale, t
 
 ROOT = Path(__file__).resolve().parents[2]
 

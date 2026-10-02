@@ -416,7 +416,7 @@
     "noEpisodesWait": "لا توجد حلقات للانتظار",
     "waitingEpisodes": "جارٍ الانتظار لمعالجة {count} جزء من النص...",
     "episodesTimeout": "بعض الأجزاء انتهت مهلة مع {completed}/{total} مكتمل",
-    "zepProcessing": "جارٍ معالجة زيب... {completed}/{total} مكتمل، {pending} قيد الانتظار ({elapsed}s)",
+    "zepProcessing": "جارٍ المعالجة باستخدام Zep... اكتمل {completed}/{total}، والمتبقي {pending} ({elapsed}s)",
     "processingComplete": "اكتملت المعالجة: {completed}/{total}",
     "taskComplete": "اكتملت المهمة",
     "taskFailed": "فشلت المهمة",
