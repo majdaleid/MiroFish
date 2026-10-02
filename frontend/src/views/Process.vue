@@ -1176,7 +1176,7 @@ onUnmounted(() => {
   height: 6px;
   border-radius: 50%;
   background: #666;
-  margin-right: 8px;
+  margin-inline-end: 8px;
 }
 
 .status-dot.processing {
@@ -1215,7 +1215,7 @@ onUnmounted(() => {
   flex: none; /* Fixed width initially */
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #E0E0E0;
+  border-inline-end: 1px solid #E0E0E0;
   transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   background: #fff;
   z-index: 5;
@@ -1223,7 +1223,7 @@ onUnmounted(() => {
 
 .left-panel.full-screen {
   width: 100%;
-  border-right: none;
+  border-inline-end: none;
 }
 
 .panel-header {
@@ -1474,7 +1474,7 @@ onUnmounted(() => {
 }
 
 .detail-close {
-  margin-left: auto;
+  margin-inline-start: auto;
   width: 24px;
   height: 24px;
   display: flex;
@@ -1534,7 +1534,7 @@ onUnmounted(() => {
   line-height: 1.6;
   padding: 10px;
   background: #F9F9F9;
-  border-left: 3px solid #FF6B35;
+  border-inline-start: 3px solid #FF6B35;
 }
 
 .detail-labels {
@@ -1615,7 +1615,7 @@ onUnmounted(() => {
 
 .property-key {
   color: #666;
-  margin-right: 8px;
+  margin-inline-end: 8px;
   font-family: 'JetBrains Mono', monospace;
 }
 
@@ -1707,7 +1707,7 @@ onUnmounted(() => {
 
 .right-panel .header-icon {
   color: #FF6B35;
-  margin-right: 8px;
+  margin-inline-end: 8px;
 }
 
 /* 流程内容 */
@@ -2038,7 +2038,7 @@ onUnmounted(() => {
 
 .item-value {
   color: #333;
-  text-align: right;
+  text-align: end;
   max-width: 60%;
   word-break: break-all;
 }
@@ -2057,7 +2057,7 @@ onUnmounted(() => {
   
   .left-panel {
     width: 100% !important;
-    border-right: none;
+    border-inline-end: none;
     border-bottom: 1px solid #E0E0E0;
     height: 50vh;
   }

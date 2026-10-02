@@ -7,7 +7,7 @@ export function isolateLatinText(element) {
   while (walker.nextNode()) nodes.push(walker.currentNode)
   for (const node of nodes) {
     if (node.parentElement.closest('bdi, code, pre, script, style')) continue
-    const parts = node.textContent.split(/([A-Za-z][A-Za-z0-9_./:@%+#-]*(?: +[A-Za-z][A-Za-z0-9_./:@%+#-]*)*)/g)
+    const parts = node.textContent.split(/([A-Za-z][A-Za-z0-9_./:@%+#?=&~-]*(?: +[A-Za-z][A-Za-z0-9_./:@%+#?=&~-]*)*)/g)
     if (parts.length === 1) continue
     const fragment = document.createDocumentFragment()
     parts.forEach((part, index) => {

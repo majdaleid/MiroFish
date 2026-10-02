@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arabic RTL smoke test</title>
+<style>
+  body { max-width: 760px; margin: 32px auto; padding: 24px; font: 20px/1.8 Tahoma, Arial, sans-serif; }
+  pre { padding: 16px; background: #f5f5f5; overflow: auto; }
+</style>
+<main>
+  <h1>اختبار عرض التقرير بالعربية</h1>
+  <p id="status">جارٍ التحقق...</p>
+  <article id="prose">
+    <p>يستخدم MiroFish تقنية GraphRAG عبر API، مع الحفاظ على LLM_API_KEY دون تغيير.</p>
+    <p>اختبر الرابط https://example.com/report?lang=ar&amp;id=1 ثم قارن النتائج.</p>
+    <ul class="md-ul"><li>الإيراد المتوقع: 123.45 EUR، وهو افتراض للاختبار.</li></ul>
+    <blockquote class="md-quote">تُعرض المصطلحات الإنجليزية باتجاه مستقل داخل النص العربي.</blockquote>
+    <p>يبقى المصطلح <code>GraphRAG</code> واضحًا.</p>
+    <pre><code>const language = "ar";
+console.log(language);</code></pre>
+  </article>
+</main>
+<script type="module">
+  import { isolateLatinText } from '/src/directives/bidi.js'
+  import '/src/styles/rtl.css'
+  const prose = document.querySelector('#prose')
+  const original = prose.textContent
+  isolateLatinText(prose)
+  const count = prose.querySelectorAll('bdi').length
+  isolateLatinText(prose)
+  const checks = {
+    copiedTextUnchanged: prose.textContent === original,
+    repeatedRenderStable: prose.querySelectorAll('bdi').length === count,
+    technicalTermsIsolated: ['MiroFish', 'GraphRAG', 'API', 'LLM_API_KEY'].every(term =>
+      [...prose.querySelectorAll('bdi')].some(el => el.textContent === term && getComputedStyle(el).direction === 'ltr')),
+    completeUrlIsolated: [...prose.querySelectorAll('bdi')].some(el => el.textContent === 'https://example.com/report?lang=ar&id=1'),
+    codeUnmodified: prose.querySelectorAll('code bdi').length === 0,
+    codeLeftToRight: getComputedStyle(prose.querySelector('pre')).direction === 'ltr',
+    arabicRightToLeft: getComputedStyle(prose).direction === 'rtl',
+    listPaddingMirrored: getComputedStyle(prose.querySelector('ul')).paddingRight === '24px',
+  }
+  const passed = Object.values(checks).every(Boolean)
+  document.querySelector('#status').textContent = passed ? 'نجحت جميع اختبارات العرض (8/8).' : 'فشل التحقق: ' + JSON.stringify(checks)
+  document.querySelector('#status').dataset.result = passed ? 'passed' : 'failed'
+  console.log('RTL smoke checks', checks)
+</script>
+</html>

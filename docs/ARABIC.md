@@ -27,3 +27,5 @@ uv run --with pytest pytest tests/test_arabic_locale.py
 ```
 
 The language instruction asks the configured LLM for Arabic; model compliance is verified separately from the deterministic tests. Simulation results remain model-generated scenarios, not measured forecasts.
+
+While the frontend dev server is running, open `/tests/rtl.html` to verify mixed Arabic/English prose, URL isolation, stable repeated rendering, unchanged copied text, LTR code and mirrored list padding without any API calls.

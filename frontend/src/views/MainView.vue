@@ -549,6 +549,6 @@ onUnmounted(() => {
 }
 
 .panel-wrapper.left {
-  border-right: 1px solid #EAEAEA;
+  border-inline-end: 1px solid #EAEAEA;
 }
 </style>

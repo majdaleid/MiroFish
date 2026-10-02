@@ -29,6 +29,8 @@ const i18n = createI18n({
 watch(i18n.global.locale, (locale) => {
   document.documentElement.lang = locale
   document.documentElement.dir = languages[locale]?.direction || 'ltr'
+  document.title = messages[locale].meta.title
+  document.querySelector('meta[name="description"]')?.setAttribute('content', messages[locale].meta.description)
   localStorage.setItem('locale', locale)
 }, { immediate: true })
 
