@@ -8,7 +8,7 @@
           <!-- Report Header -->
           <div class="report-header-block">
             <div class="report-meta">
-              <span class="report-tag">Prediction Report</span>
+              <span class="report-tag">{{ $t('ui.predictionReport') }}</span>
               <span class="report-id">ID: {{ reportId || 'REF-2024-X92' }}</span>
             </div>
             <h1 class="main-title">{{ reportOutline.title }}</h1>
@@ -48,7 +48,7 @@
               
               <div class="section-body" v-show="!collapsedSections.has(idx)">
                 <!-- Completed Content -->
-                <div v-if="generatedSections[idx + 1]" class="generated-content" v-html="renderMarkdown(generatedSections[idx + 1])"></div>
+                <div v-if="generatedSections[idx + 1]" class="generated-content" v-bidi v-html="renderMarkdown(generatedSections[idx + 1])"></div>
                 
                 <!-- Loading State -->
                 <div v-else-if="currentSectionIndex === idx + 1" class="loading-state">
@@ -72,7 +72,7 @@
             <div class="waiting-ring"></div>
             <div class="waiting-ring"></div>
           </div>
-          <span class="waiting-text">Waiting for Report Agent...</span>
+          <span class="waiting-text">{{ $t('step4.waitingForReportAgent') }}</span>
         </div>
       </div>
 
@@ -270,7 +270,7 @@
                   </span>
                   <span class="message-time">{{ formatTime(msg.timestamp) }}</span>
                 </div>
-                <div class="message-text" v-html="renderMarkdown(msg.content)"></div>
+                <div class="message-text" v-bidi v-html="renderMarkdown(msg.content)"></div>
               </div>
             </div>
             <div v-if="isSending" class="chat-message assistant">
@@ -289,7 +289,7 @@
 
           <!-- Chat Input -->
           <div class="chat-input-area">
-            <textarea 
+            <textarea dir="auto"
               v-model="chatInput"
               class="chat-input"
               :placeholder="$t('step5.chatInputPlaceholder')"
@@ -355,7 +355,7 @@
               <div class="section-header">
                 <span class="section-title">{{ $t('step5.surveyQuestions') }}</span>
               </div>
-              <textarea 
+              <textarea dir="auto"
                 v-model="surveyQuestion"
                 class="survey-input"
                 :placeholder="$t('step5.surveyInputPlaceholder')"
@@ -400,7 +400,7 @@
                   </svg>
                   <span>{{ result.question }}</span>
                 </div>
-                <div class="result-answer" v-html="renderMarkdown(result.answer)"></div>
+                <div class="result-answer" v-bidi v-html="renderMarkdown(result.answer)"></div>
               </div>
             </div>
           </div>
@@ -988,7 +988,7 @@ watch(() => props.simulationId, (newId) => {
   width: 45%;
   min-width: 450px;
   background: #FFFFFF;
-  border-right: 1px solid #E5E7EB;
+  border-inline-end: 1px solid #E5E7EB;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -1110,7 +1110,7 @@ watch(() => props.simulationId, (newId) => {
 }
 
 .collapse-icon {
-  margin-left: auto;
+  margin-inline-start: auto;
   color: #9CA3AF;
   transition: transform 0.3s ease;
   flex-shrink: 0;
@@ -1157,7 +1157,7 @@ watch(() => props.simulationId, (newId) => {
 }
 
 .section-body {
-  padding-left: 28px;
+  padding-inline-start: 28px;
   overflow: hidden;
 }
 
@@ -1189,7 +1189,7 @@ watch(() => props.simulationId, (newId) => {
 
 .generated-content :deep(.md-ul),
 .generated-content :deep(.md-ol) {
-  padding-left: 20px;
+  padding-inline-start: 20px;
   margin-bottom: 1em;
 }
 
@@ -1198,8 +1198,8 @@ watch(() => props.simulationId, (newId) => {
 }
 
 .generated-content :deep(.md-quote) {
-  border-left: 3px solid #E5E7EB;
-  padding-left: 16px;
+  border-inline-start: 3px solid #E5E7EB;
+  padding-inline-start: 16px;
   margin: 1.5em 0;
   color: #6B7280;
   font-style: italic;
@@ -1417,7 +1417,7 @@ watch(() => props.simulationId, (newId) => {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  text-align: left;
+  text-align: start;
 }
 
 .survey-pill {
@@ -1809,7 +1809,7 @@ watch(() => props.simulationId, (newId) => {
 }
 
 .dropdown-arrow {
-  margin-left: 4px;
+  margin-inline-start: 4px;
   transition: transform 0.2s ease;
   opacity: 0.6;
 }
@@ -1850,12 +1850,12 @@ watch(() => props.simulationId, (newId) => {
   padding: 10px 16px;
   cursor: pointer;
   transition: all 0.15s ease;
-  border-left: 3px solid transparent;
+  border-inline-start: 3px solid transparent;
 }
 
 .dropdown-item:hover {
   background: #F9FAFB;
-  border-left-color: #1F2937;
+  border-inline-start-color: #1F2937;
 }
 
 .dropdown-item:first-of-type {
@@ -2038,7 +2038,7 @@ watch(() => props.simulationId, (newId) => {
 
 .message-text :deep(.md-ol) {
   list-style: none;
-  padding-left: 0;
+  padding-inline-start: 0;
   margin: 8px 0;
 }
 
@@ -2059,7 +2059,7 @@ watch(() => props.simulationId, (newId) => {
 
 /* 无序列表样式 */
 .message-text :deep(.md-ul) {
-  padding-left: 20px;
+  padding-inline-start: 20px;
   margin: 8px 0;
 }
 
@@ -2529,7 +2529,7 @@ watch(() => props.simulationId, (newId) => {
 
 :deep(.md-ul), :deep(.md-ol) {
   margin: 12px 0;
-  padding-left: 24px;
+  padding-inline-start: 24px;
 }
 
 :deep(.md-li), :deep(.md-oli) {
@@ -2542,7 +2542,7 @@ watch(() => props.simulationId, (newId) => {
   margin: 12px 0;
   padding: 12px 16px;
   background: #F9FAFB;
-  border-left: 3px solid #1F2937;
+  border-inline-start: 3px solid #1F2937;
   color: #4B5563;
 }
 

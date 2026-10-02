@@ -1,4 +1,5 @@
 import { createI18n } from 'vue-i18n'
+import { watch } from 'vue'
 import languages from '../../../locales/languages.json'
 
 const localeFiles = import.meta.glob('../../../locales/!(languages).json', { eager: true })
@@ -14,14 +15,22 @@ for (const path in localeFiles) {
   }
 }
 
-const savedLocale = localStorage.getItem('locale') || 'zh'
+const storedLocale = localStorage.getItem('locale')
+const savedLocale = messages[storedLocale] ? storedLocale : 'en'
 
 const i18n = createI18n({
   legacy: false,
   locale: savedLocale,
-  fallbackLocale: 'zh',
+  fallbackLocale: 'en',
   messages
 })
+
+// Apply before mounting and whenever the user changes language, including reloads.
+watch(i18n.global.locale, (locale) => {
+  document.documentElement.lang = locale
+  document.documentElement.dir = languages[locale]?.direction || 'ltr'
+  localStorage.setItem('locale', locale)
+}, { immediate: true })
 
 export { availableLocales }
 export default i18n

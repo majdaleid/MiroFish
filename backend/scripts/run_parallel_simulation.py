@@ -64,6 +64,8 @@ if sys.platform == 'win32':
     
     builtins.open = _utf8_open
 
+from output_language import apply_output_language
+
 import argparse
 import asyncio
 import json
@@ -1141,6 +1143,8 @@ async def run_twitter_simulation(
         available_actions=TWITTER_ACTIONS,
     )
     
+    apply_output_language(result.agent_graph)
+
     # 从配置文件获取 Agent 真实名称映射（使用 entity_name 而非默认的 Agent_X）
     agent_names = get_agent_names_from_config(config)
     # 如果配置中没有某个 agent，则使用 OASIS 的默认名称
@@ -1332,6 +1336,8 @@ async def run_reddit_simulation(
         available_actions=REDDIT_ACTIONS,
     )
     
+    apply_output_language(result.agent_graph)
+
     # 从配置文件获取 Agent 真实名称映射（使用 entity_name 而非默认的 Agent_X）
     agent_names = get_agent_names_from_config(config)
     # 如果配置中没有某个 agent，则使用 OASIS 的默认名称

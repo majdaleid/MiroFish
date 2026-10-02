@@ -1,0 +1,29 @@
+/* Arabic layout inherits RTL; technical literals retain their LTR order. */
+html[lang="ar"] #app {
+  font-family: Tahoma, Arial, 'Noto Sans Arabic', sans-serif;
+}
+html[lang="ar"] :is(button, input, textarea, .switcher-trigger, .language-switcher) {
+  font-family: inherit;
+}
+html[dir="rtl"] :is(p, h1, h2, h3, h4, h5, textarea, .message-text, .result-answer, .generated-content) {
+  text-align: start;
+}
+/* User input follows its own language, independently of the output language. */
+textarea { unicode-bidi: plaintext; }
+:is(bdi, code, pre, .nav-brand, .version-text, .model-badge, .file-name, .step-num) {
+  unicode-bidi: isolate;
+}
+:is(code, pre, .nav-brand, .version-text, .model-badge, .file-name, .step-num) {
+  direction: ltr;
+}
+:is(code, pre) { text-align: left; }
+html[dir="rtl"] :is(.md-ul, .md-ol) {
+  padding-left: 0 !important;
+  padding-inline-start: 24px;
+}
+html[dir="rtl"] .md-quote {
+  border-left: 0 !important;
+  border-inline-start: 3px solid #E5E7EB;
+  padding-left: 0 !important;
+  padding-inline-start: 16px;
+}

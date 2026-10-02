@@ -1,4 +1,9 @@
 {
+  "ar": {
+    "label": "العربية",
+    "direction": "rtl",
+    "llmInstruction": "Output language: Arabic. Write all user-facing prose, report titles, summaries, sections, explanations, posts and answers in clear Modern Standard Arabic, even when the user's prompt and source documents are in English. This output-language requirement overrides the language of the input and examples. Preserve important English product names and technical terms such as MiroFish, Zep, GraphRAG, LLM, API, Twitter and Reddit. In Markdown prose, place English technical terms in inline code for readable bidirectional display. Keep JSON keys, enum values, tool names, code, URLs, identifiers and protocol markers such as Thought:, Action: and Final Answer: unchanged in English. Use Western digits. Do not emit HTML direction wrappers or invisible Unicode bidi control characters."
+  },
   "zh": {
     "label": "中文",
     "llmInstruction": "请使用中文回答。"

@@ -882,7 +882,7 @@ onUnmounted(() => {
   width: 8px;
   height: 8px;
   border-top: 1.5px solid rgba(0, 0, 0, 0.4);
-  border-left: 1.5px solid rgba(0, 0, 0, 0.4);
+  border-inline-start: 1.5px solid rgba(0, 0, 0, 0.4);
   pointer-events: none;
   z-index: 10;
 }
@@ -1180,7 +1180,7 @@ onUnmounted(() => {
   gap: 10px;
   max-height: 200px;
   overflow-y: auto;
-  padding-right: 4px;
+  padding-inline-end: 4px;
 }
 
 /* 自定义滚动条样式 */

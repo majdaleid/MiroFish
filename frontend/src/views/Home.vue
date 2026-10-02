@@ -178,7 +178,7 @@
                 <span class="console-label">{{ $t('home.simulationPrompt') }}</span>
               </div>
               <div class="input-wrapper">
-                <textarea
+                <textarea dir="auto"
                   v-model="formData.simulationRequirement"
                   class="code-input"
                   :placeholder="$t('home.promptPlaceholder')"

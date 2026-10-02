@@ -75,7 +75,13 @@
     "layoutGraph": "Graph",
     "layoutSplit": "Split",
     "layoutWorkbench": "Workbench",
-    "stepNames": ["Graph Build", "Env Setup", "Run Simulation", "Report Generation", "Deep Interaction"]
+    "stepNames": [
+      "Graph Build",
+      "Env Setup",
+      "Run Simulation",
+      "Report Generation",
+      "Deep Interaction"
+    ]
   },
   "step1": {
     "ontologyGeneration": "Ontology Generation",
@@ -609,7 +615,14 @@
     "reportSaved": "Report saved: {reportId}",
     "reportFolderDeleted": "Report folder deleted: {reportId}",
     "redirectToQuickSearch": "search_graph redirected to quick_search",
-    "redirectToInsightForge": "get_simulation_context redirected to insight_forge"
+    "redirectToInsightForge": "get_simulation_context redirected to insight_forge",
+    "fallbackTitle": "Future Prediction Report",
+    "fallbackSummary": "Analysis of future trends and risks based on simulation",
+    "fallbackSections": [
+      "Scenario and key findings",
+      "Group behavior analysis",
+      "Trends and risks"
+    ]
   },
   "console": {
     "zepToolsInitialized": "ZepToolsService initialized",
@@ -663,5 +676,45 @@
     "llmSelectAgentFailed": "LLM agent selection failed, using default selection: {error}",
     "generateInterviewQuestionsFailed": "Failed to generate interview questions: {error}",
     "generateInterviewSummaryFailed": "Failed to generate interview summary: {error}"
+  },
+  "ui": {
+    "predictionReport": "Prediction Report",
+    "sections": "Sections",
+    "elapsed": "Elapsed",
+    "tools": "Tools",
+    "simulation": "Simulation",
+    "requirement": "Requirement",
+    "reportComplete": "Report Generation Complete",
+    "waitingActivity": "Waiting for agent activity...",
+    "consoleOutput": "CONSOLE OUTPUT",
+    "refresh": "Refresh",
+    "name": "Name:",
+    "created": "Created:",
+    "properties": "Properties:",
+    "summary": "Summary:",
+    "labels": "Labels:",
+    "fact": "Fact:",
+    "type": "Type:",
+    "episodes": "Episodes:",
+    "label": "Label:",
+    "validFrom": "Valid From:",
+    "entityTypes": "Entity Types",
+    "showEdgeLabels": "Show Edge Labels",
+    "attributes": "ATTRIBUTES",
+    "examples": "EXAMPLES",
+    "connections": "CONNECTIONS",
+    "generatedEntityTypes": "GENERATED ENTITY TYPES",
+    "generatedRelationTypes": "GENERATED RELATION TYPES",
+    "dashboard": "SYSTEM DASHBOARD",
+    "infoPlaza": "Info Plaza",
+    "round": "ROUND",
+    "time": "TIME",
+    "acts": "ACTS",
+    "availableActions": "Available Actions",
+    "topicCommunity": "Topic Community",
+    "totalEvents": "TOTAL EVENTS:",
+    "searchQuery": "Search Query:",
+    "actionSkipped": "Action Skipped",
+    "simulationMonitor": "SIMULATION MONITOR"
   }
 }
