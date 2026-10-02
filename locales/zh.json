@@ -75,7 +75,13 @@
     "layoutGraph": "图谱",
     "layoutSplit": "双栏",
     "layoutWorkbench": "工作台",
-    "stepNames": ["图谱构建", "环境搭建", "开始模拟", "报告生成", "深度互动"]
+    "stepNames": [
+      "图谱构建",
+      "环境搭建",
+      "开始模拟",
+      "报告生成",
+      "深度互动"
+    ]
   },
   "step1": {
     "ontologyGeneration": "本体生成",
@@ -609,7 +615,14 @@
     "reportSaved": "报告已保存: {reportId}",
     "reportFolderDeleted": "报告文件夹已删除: {reportId}",
     "redirectToQuickSearch": "search_graph 已重定向到 quick_search",
-    "redirectToInsightForge": "get_simulation_context 已重定向到 insight_forge"
+    "redirectToInsightForge": "get_simulation_context 已重定向到 insight_forge",
+    "fallbackTitle": "未来预测报告",
+    "fallbackSummary": "基于模拟预测的未来趋势与风险分析",
+    "fallbackSections": [
+      "预测场景与核心发现",
+      "人群行为预测分析",
+      "趋势展望与风险提示"
+    ]
   },
   "console": {
     "zepToolsInitialized": "ZepToolsService 初始化完成",
@@ -663,5 +676,45 @@
     "llmSelectAgentFailed": "LLM选择Agent失败，使用默认选择: {error}",
     "generateInterviewQuestionsFailed": "生成采访问题失败: {error}",
     "generateInterviewSummaryFailed": "生成采访摘要失败: {error}"
+  },
+  "ui": {
+    "predictionReport": "预测报告",
+    "sections": "章节",
+    "elapsed": "耗时",
+    "tools": "工具",
+    "simulation": "模拟",
+    "requirement": "需求",
+    "reportComplete": "报告生成完成",
+    "waitingActivity": "等待智能体活动...",
+    "consoleOutput": "控制台输出",
+    "refresh": "刷新",
+    "name": "名称:",
+    "created": "创建时间:",
+    "properties": "属性:",
+    "summary": "摘要:",
+    "labels": "标签:",
+    "fact": "事实:",
+    "type": "类型:",
+    "episodes": "事件:",
+    "label": "标签:",
+    "validFrom": "有效起始时间:",
+    "entityTypes": "实体类型",
+    "showEdgeLabels": "显示关系标签",
+    "attributes": "属性",
+    "examples": "示例",
+    "connections": "连接",
+    "generatedEntityTypes": "生成的实体类型",
+    "generatedRelationTypes": "生成的关系类型",
+    "dashboard": "系统仪表板",
+    "infoPlaza": "信息广场",
+    "round": "轮次",
+    "time": "时间",
+    "acts": "动作",
+    "availableActions": "可用动作",
+    "topicCommunity": "话题社区",
+    "totalEvents": "总事件:",
+    "searchQuery": "搜索查询:",
+    "actionSkipped": "动作已跳过",
+    "simulationMonitor": "模拟监控"
   }
 }

@@ -13,6 +13,8 @@ OASIS Twitter模拟预设脚本
     python run_twitter_simulation.py --config /path/to/simulation_config.json --no-wait  # 完成后立即关闭
 """
 
+from output_language import apply_output_language
+
 import argparse
 import asyncio
 import json
@@ -580,6 +582,7 @@ class TwitterSimulationRunner:
             model=model,
             available_actions=self.AVAILABLE_ACTIONS,
         )
+        apply_output_language(self.agent_graph)
         
         # 数据库路径
         db_path = self._get_db_path()

@@ -5,7 +5,7 @@
       <div class="nav-brand">MIROFISH</div>
       <div class="nav-links">
         <LanguageSwitcher />
-        <a href="https://github.com/666ghj/MiroFish" target="_blank" class="github-link">
+        <a href="https://github.com/majdaleid/MiroFish" target="_blank" class="github-link">
           {{ $t('nav.visitGithub') }} <span class="arrow">↗</span>
         </a>
       </div>
@@ -178,7 +178,7 @@
                 <span class="console-label">{{ $t('home.simulationPrompt') }}</span>
               </div>
               <div class="input-wrapper">
-                <textarea
+                <textarea dir="auto"
                   v-model="formData.simulationRequirement"
                   class="code-input"
                   :placeholder="$t('home.promptPlaceholder')"
@@ -397,7 +397,7 @@ const startSimulation = () => {
 
 .hero-left {
   flex: 1;
-  padding-right: 60px;
+  padding-inline-end: 60px;
 }
 
 .tag-row {
@@ -480,8 +480,8 @@ const startSimulation = () => {
   font-weight: 520;
   color: var(--black);
   letter-spacing: 1px;
-  border-left: 3px solid var(--orange);
-  padding-left: 15px;
+  border-inline-start: 3px solid var(--orange);
+  padding-inline-start: 15px;
   margin-top: 20px;
 }
 
@@ -514,7 +514,7 @@ const startSimulation = () => {
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  padding-right: 40px;
+  padding-inline-end: 40px;
 }
 
 .hero-logo {
@@ -817,7 +817,7 @@ const startSimulation = () => {
 .model-badge {
   position: absolute;
   bottom: 10px;
-  right: 15px;
+  inset-inline-end: 15px;
   font-family: var(--font-mono);
   font-size: 0.7rem;
   color: #AAA;
@@ -885,7 +885,7 @@ const startSimulation = () => {
   }
   
   .hero-left {
-    padding-right: 0;
+    padding-inline-end: 0;
     margin-bottom: 40px;
   }
   
@@ -905,7 +905,7 @@ html[lang="en"] .main-title {
 }
 
 html[lang="en"] .hero-desc {
-  text-align: left;
+  text-align: start;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   letter-spacing: 0;
 }

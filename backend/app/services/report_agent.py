@@ -1248,13 +1248,9 @@ class ReportAgent:
             logger.error(t('report.outlinePlanFailed', error=str(e)))
             # 返回默认大纲（3个章节，作为fallback）
             return ReportOutline(
-                title="未来预测报告",
-                summary="基于模拟预测的未来趋势与风险分析",
-                sections=[
-                    ReportSection(title="预测场景与核心发现"),
-                    ReportSection(title="人群行为预测分析"),
-                    ReportSection(title="趋势展望与风险提示")
-                ]
+                title=t('report.fallbackTitle'),
+                summary=t('report.fallbackSummary'),
+                sections=[ReportSection(title=title) for title in t('report.fallbackSections')]
             )
     
     def _generate_section_react(

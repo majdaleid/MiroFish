@@ -1,7 +1,7 @@
 <template>
   <div class="language-switcher" ref="switcherRef">
     <button class="switcher-trigger" @click="toggleDropdown">
-      {{ currentLabel }}
+      <bdi>{{ currentLabel }}</bdi>
       <span class="caret">{{ open ? '▲' : '▼' }}</span>
     </button>
     <ul v-if="open" class="switcher-dropdown">
@@ -12,7 +12,7 @@
         :class="{ active: loc.key === locale }"
         @click="switchLocale(loc.key)"
       >
-        {{ loc.label }}
+        <bdi>{{ loc.label }}</bdi>
       </li>
     </ul>
   </div>
@@ -38,8 +38,6 @@ const toggleDropdown = () => {
 
 const switchLocale = (key) => {
   locale.value = key
-  localStorage.setItem('locale', key)
-  document.documentElement.lang = key
   open.value = false
 }
 
@@ -51,7 +49,6 @@ const onClickOutside = (e) => {
 
 onMounted(() => {
   document.addEventListener('click', onClickOutside)
-  document.documentElement.lang = locale.value
 })
 
 onUnmounted(() => {
@@ -92,7 +89,7 @@ onUnmounted(() => {
 .switcher-dropdown {
   position: absolute;
   top: 100%;
-  right: 0;
+  inset-inline-end: 0;
   margin-top: 4px;
   background: #FFFFFF;
   border: 1px solid #DDD;

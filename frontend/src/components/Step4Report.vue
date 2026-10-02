@@ -8,7 +8,7 @@
           <!-- Report Header -->
           <div class="report-header-block">
             <div class="report-meta">
-              <span class="report-tag">Prediction Report</span>
+              <span class="report-tag">{{ $t('ui.predictionReport') }}</span>
               <span class="report-id">ID: {{ reportId || 'REF-2024-X92' }}</span>
             </div>
             <h1 class="main-title">{{ reportOutline.title }}</h1>
@@ -48,7 +48,7 @@
               
               <div class="section-body" v-show="!collapsedSections.has(idx)">
                 <!-- Completed Content -->
-                <div v-if="generatedSections[idx + 1]" class="generated-content" v-html="renderMarkdown(generatedSections[idx + 1])"></div>
+                <div v-if="generatedSections[idx + 1]" class="generated-content" v-bidi v-html="renderMarkdown(generatedSections[idx + 1])"></div>
                 
                 <!-- Loading State -->
                 <div v-else-if="currentSectionIndex === idx + 1" class="loading-state">
@@ -72,7 +72,7 @@
             <div class="waiting-ring"></div>
             <div class="waiting-ring"></div>
           </div>
-          <span class="waiting-text">Waiting for Report Agent...</span>
+          <span class="waiting-text">{{ $t('step4.waitingForReportAgent') }}</span>
         </div>
       </div>
 
@@ -89,15 +89,15 @@
         <div class="workflow-overview" v-if="agentLogs.length > 0 || reportOutline">
           <div class="workflow-metrics">
             <div class="metric">
-              <span class="metric-label">Sections</span>
+              <span class="metric-label">{{ $t('ui.sections') }}</span>
               <span class="metric-value mono">{{ completedSections }}/{{ totalSections }}</span>
             </div>
             <div class="metric">
-              <span class="metric-label">Elapsed</span>
+              <span class="metric-label">{{ $t('ui.elapsed') }}</span>
               <span class="metric-value mono">{{ formatElapsedTime }}</span>
             </div>
             <div class="metric">
-              <span class="metric-label">Tools</span>
+              <span class="metric-label">{{ $t('ui.tools') }}</span>
               <span class="metric-value mono">{{ totalToolCalls }}</span>
             </div>
             <div class="metric metric-right">
@@ -166,11 +166,11 @@
                   <!-- Report Start -->
                   <template v-if="log.action === 'report_start'">
                     <div class="info-row">
-                      <span class="info-key">Simulation</span>
+                      <span class="info-key">{{ $t('ui.simulation') }}</span>
                       <span class="info-val mono">{{ log.details?.simulation_id }}</span>
                     </div>
                     <div class="info-row" v-if="log.details?.simulation_requirement">
-                      <span class="info-key">Requirement</span>
+                      <span class="info-key">{{ $t('ui.requirement') }}</span>
                       <span class="info-val">{{ log.details.simulation_requirement }}</span>
                     </div>
                   </template>
@@ -334,7 +334,7 @@
                         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                         <polyline points="22 4 12 14.01 9 11.01"></polyline>
                       </svg>
-                      <span>Report Generation Complete</span>
+                      <span>{{ $t('ui.reportComplete') }}</span>
                     </div>
                   </template>
                 </div>
@@ -368,7 +368,7 @@
           <!-- Empty State -->
           <div v-if="agentLogs.length === 0 && !isComplete" class="workflow-empty">
             <div class="empty-pulse"></div>
-            <span>Waiting for agent activity...</span>
+            <span>{{ $t('ui.waitingActivity') }}</span>
           </div>
         </div>
       </div>
@@ -377,7 +377,7 @@
     <!-- Bottom Console Logs -->
     <div class="console-logs">
       <div class="log-header">
-        <span class="log-title">CONSOLE OUTPUT</span>
+        <span class="log-title">{{ $t('ui.consoleOutput') }}</span>
         <span class="log-id">{{ reportId || 'NO_REPORT' }}</span>
       </div>
       <div class="log-content" ref="logContent">
@@ -2248,7 +2248,7 @@ watch(() => props.reportId, (newId) => {
   border-radius: 50%;
   background: #1F2937;
   box-shadow: 0 0 0 3px rgba(31, 41, 55, 0.15);
-  margin-right: 10px;
+  margin-inline-end: 10px;
   flex-shrink: 0;
   animation: pulse-dot 1.5s ease-in-out infinite;
 }
@@ -2266,7 +2266,7 @@ watch(() => props.reportId, (newId) => {
   font-size: 12px;
   font-weight: 600;
   color: #9CA3AF;
-  margin-right: 10px;
+  margin-inline-end: 10px;
   flex-shrink: 0;
 }
 
@@ -2282,7 +2282,7 @@ watch(() => props.reportId, (newId) => {
 }
 
 .header-meta {
-  margin-left: auto;
+  margin-inline-start: auto;
   font-size: 10px;
   font-weight: 600;
   color: #6B7280;
@@ -2325,7 +2325,7 @@ watch(() => props.reportId, (newId) => {
   width: 45%;
   min-width: 450px;
   background: #FFFFFF;
-  border-right: 1px solid #E5E7EB;
+  border-inline-end: 1px solid #E5E7EB;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -2447,7 +2447,7 @@ watch(() => props.reportId, (newId) => {
 }
 
 .collapse-icon {
-  margin-left: auto;
+  margin-inline-start: auto;
   color: #9CA3AF;
   transition: transform 0.3s ease;
   flex-shrink: 0;
@@ -2485,7 +2485,7 @@ watch(() => props.reportId, (newId) => {
 }
 
 .section-body {
-  padding-left: 28px;
+  padding-inline-start: 28px;
   overflow: hidden;
 }
 
@@ -2517,7 +2517,7 @@ watch(() => props.reportId, (newId) => {
 
 .generated-content :deep(.md-ul),
 .generated-content :deep(.md-ol) {
-  padding-left: 24px;
+  padding-inline-start: 24px;
   margin: 12px 0;
 }
 
@@ -2527,8 +2527,8 @@ watch(() => props.reportId, (newId) => {
 }
 
 .generated-content :deep(.md-quote) {
-  border-left: 3px solid #E5E7EB;
-  padding-left: 16px;
+  border-inline-start: 3px solid #E5E7EB;
+  padding-inline-start: 16px;
   margin: 1.5em 0;
   color: #6B7280;
   font-style: italic;
@@ -2736,7 +2736,7 @@ watch(() => props.reportId, (newId) => {
 }
 
 .metric-right {
-  margin-left: auto;
+  margin-inline-start: auto;
 }
 
 .metric-label {
@@ -2876,7 +2876,7 @@ watch(() => props.reportId, (newId) => {
 }
 
 .wf-step-meta {
-  margin-left: auto;
+  margin-inline-start: auto;
   font-size: 10px;
   font-weight: 700;
   color: var(--wf-active-text);
@@ -3033,7 +3033,7 @@ watch(() => props.reportId, (newId) => {
 .footer-actions {
   display: flex;
   gap: 8px;
-  margin-left: auto;
+  margin-inline-start: auto;
 }
 
 .elapsed-badge {
@@ -4190,7 +4190,7 @@ watch(() => props.reportId, (newId) => {
 :deep(.interview-display .summary-content ul),
 :deep(.interview-display .summary-content ol) {
   margin: 8px 0;
-  padding-left: 20px;
+  padding-inline-start: 20px;
 }
 
 :deep(.interview-display .summary-content li) {
@@ -4199,8 +4199,8 @@ watch(() => props.reportId, (newId) => {
 
 :deep(.interview-display .summary-content blockquote) {
   margin: 8px 0;
-  padding-left: 12px;
-  border-left: 3px solid #E5E7EB;
+  padding-inline-start: 12px;
+  border-inline-start: 3px solid #E5E7EB;
   color: #6B7280;
   font-style: italic;
 }
@@ -4437,7 +4437,7 @@ watch(() => props.reportId, (newId) => {
 :deep(.insight-display .entity-tag .entity-fact-count) {
   font-size: 9px;
   color: #9CA3AF;
-  margin-left: 2px;
+  margin-inline-start: 2px;
 }
 
 /* Legacy entity card styles for backwards compatibility */
@@ -5133,7 +5133,7 @@ watch(() => props.reportId, (newId) => {
   gap: 4px;
   height: 100px;
   overflow-y: auto;
-  padding-right: 4px;
+  padding-inline-end: 4px;
 }
 
 .log-content::-webkit-scrollbar { width: 4px; }

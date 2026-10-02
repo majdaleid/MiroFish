@@ -618,7 +618,7 @@
     <!-- Bottom Info / Logs -->
     <div class="system-logs">
       <div class="log-header">
-        <span class="log-title">SYSTEM DASHBOARD</span>
+        <span class="log-title">{{ $t('ui.dashboard') }}</span>
         <span class="log-id">{{ simulationId || 'NO_SIMULATION' }}</span>
       </div>
       <div class="log-content" ref="logContent">
@@ -1346,7 +1346,7 @@ onUnmounted(() => {
   gap: 12px;
   max-height: 320px;
   overflow-y: auto;
-  padding-right: 4px;
+  padding-inline-end: 4px;
 }
 
 .profiles-list::-webkit-scrollbar {
@@ -1556,7 +1556,7 @@ onUnmounted(() => {
   gap: 12px;
   max-height: 400px;
   overflow-y: auto;
-  padding-right: 4px;
+  padding-inline-end: 4px;
 }
 
 .agents-cards::-webkit-scrollbar {
@@ -1982,7 +1982,7 @@ onUnmounted(() => {
   padding: 16px;
   background: #F9F9F9;
   border-radius: 6px;
-  border-left: 3px solid #E0E0E0;
+  border-inline-start: 3px solid #E0E0E0;
 }
 
 /* 话题标签 */
@@ -2019,13 +2019,13 @@ onUnmounted(() => {
   background: #F8F9FA;
   padding: 12px;
   border-radius: 6px;
-  border-left: 3px solid #DDD;
+  border-inline-start: 3px solid #DDD;
   transition: all 0.2s;
 }
 
 .dimension-card:hover {
   background: #F0F0F0;
-  border-left-color: #999;
+  border-inline-start-color: #999;
 }
 
 .dim-title {
@@ -2095,7 +2095,7 @@ onUnmounted(() => {
   gap: 4px;
   height: 80px; /* Approx 4 lines visible */
   overflow-y: auto;
-  padding-right: 4px;
+  padding-inline-end: 4px;
 }
 
 .log-content::-webkit-scrollbar {
@@ -2228,14 +2228,14 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding-left: 8px;
-  border-left: 2px solid #F0F0F0;
+  padding-inline-start: 8px;
+  border-inline-start: 2px solid #F0F0F0;
   margin-top: 12px;
 }
 
 .timeline-item {
   position: relative;
-  padding-left: 20px;
+  padding-inline-start: 20px;
 }
 
 .timeline-marker {
@@ -2283,7 +2283,7 @@ onUnmounted(() => {
 }
 
 .post-username {
-  margin-right: 6px;
+  margin-inline-end: 6px;
 }
 
 .post-text {
@@ -2524,8 +2524,8 @@ onUnmounted(() => {
   flex-direction: row;
   align-items: baseline;
   gap: 4px;
-  padding-right: 24px;
-  border-right: 1px solid #E2E8F0;
+  padding-inline-end: 24px;
+  border-inline-end: 1px solid #E2E8F0;
 }
 
 .auto-content {

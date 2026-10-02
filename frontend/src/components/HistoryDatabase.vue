@@ -78,10 +78,10 @@
         </div>
 
         <!-- 卡片标题（使用模拟需求的前20字作为标题） -->
-        <h3 class="card-title">{{ getSimulationTitle(project.simulation_requirement) }}</h3>
+        <h3 class="card-title" dir="auto">{{ getSimulationTitle(project.simulation_requirement) }}</h3>
 
         <!-- 卡片描述（模拟需求完整展示） -->
-        <p class="card-desc">{{ truncateText(project.simulation_requirement, 55) }}</p>
+        <p class="card-desc" dir="auto">{{ truncateText(project.simulation_requirement, 55) }}</p>
 
         <!-- 卡片底部 -->
         <div class="card-footer">
@@ -127,7 +127,7 @@
               <!-- 模拟需求 -->
               <div class="modal-section">
                 <div class="modal-label">{{ $t('history.simRequirement') }}</div>
-                <div class="modal-requirement">{{ selectedProject.simulation_requirement || $t('common.none') }}</div>
+                <div class="modal-requirement" dir="auto">{{ selectedProject.simulation_requirement || $t('common.none') }}</div>
               </div>
 
               <!-- 文件列表 -->
@@ -882,7 +882,7 @@ onUnmounted(() => {
   width: 8px;
   height: 8px;
   border-top: 1.5px solid rgba(0, 0, 0, 0.4);
-  border-left: 1.5px solid rgba(0, 0, 0, 0.4);
+  border-inline-start: 1.5px solid rgba(0, 0, 0, 0.4);
   pointer-events: none;
   z-index: 10;
 }
@@ -1180,7 +1180,7 @@ onUnmounted(() => {
   gap: 10px;
   max-height: 200px;
   overflow-y: auto;
-  padding-right: 4px;
+  padding-inline-end: 4px;
 }
 
 /* 自定义滚动条样式 */
