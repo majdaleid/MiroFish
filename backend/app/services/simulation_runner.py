@@ -654,6 +654,7 @@ class SimulationRunner:
                 
                 # 更新状态
                 cls._save_run_state(state)
+                cls._finalize_platform_completion(state)
                 time.sleep(2)
             
             # 进程结束后，最后读取一次日志
@@ -680,6 +681,7 @@ class SimulationRunner:
                 if state.runner_status not in {
                     RunnerStatus.STOPPED,
                     RunnerStatus.FAILED,
+                    RunnerStatus.COMPLETED,
                 }:
                     manual_stop = simulation_id in cls._manual_stop_requests
                     desired_status = (
@@ -763,6 +765,50 @@ class SimulationRunner:
                 except Exception:
                     pass
                 cls._stderr_files.pop(simulation_id, None)
+
+    @classmethod
+    def _finalize_platform_completion(cls, state: SimulationRunState) -> None:
+        """Publish completion once all platform logs and graph writes are drained."""
+        if not cls._check_all_platforms_completed(state):
+            return
+
+        simulation_id = state.simulation_id
+        with cls._finalization_lock(simulation_id):
+            state = cls.get_run_state(simulation_id) or state
+            if state.runner_status != RunnerStatus.RUNNING:
+                return
+
+            state.runner_status = RunnerStatus.STOPPING
+            cls._save_run_state(state)
+            cls._sync_simulation_status(simulation_id, RunnerStatus.STOPPING)
+
+            if cls._graph_memory_enabled.get(simulation_id, False):
+                try:
+                    ZepGraphMemoryManager.stop_updater(simulation_id)
+                    cls._graph_memory_enabled.pop(simulation_id, None)
+                except Exception as error:
+                    state.runner_status = RunnerStatus.FAILED
+                    state.error = f"Zep图谱写入未完整完成: {error}"
+                    state.completed_at = datetime.now().isoformat()
+                    cls._save_run_state(state)
+                    cls._sync_simulation_status(
+                        simulation_id,
+                        RunnerStatus.FAILED,
+                        state.error,
+                    )
+                    logger.error(
+                        "平台完成后的图谱写入未完成: simulation_id=%s, error=%s",
+                        simulation_id,
+                        error,
+                    )
+                    return
+
+            state.runner_status = RunnerStatus.COMPLETED
+            state.error = None
+            state.completed_at = datetime.now().isoformat()
+            cls._save_run_state(state)
+            cls._sync_simulation_status(simulation_id, RunnerStatus.COMPLETED)
+            logger.info("模拟平台运行完成: %s", simulation_id)
     
     @classmethod
     def _read_action_log(
@@ -821,10 +867,11 @@ class SimulationRunner:
                                     if all_completed:
                                         # Platform completion is only an input
                                         # signal. The monitor publishes the
-                                        # terminal status after the process has
-                                        # exited and Zep ingestion has drained.
+                                        # terminal status after the logs and
+                                        # Zep ingestion have drained. The process
+                                        # may stay alive for agent interviews.
                                         logger.info(
-                                            f"所有平台已结束，等待进程与图谱写入完成: "
+                                            f"所有平台已结束，等待图谱写入完成: "
                                             f"{state.simulation_id}"
                                         )
                                 
@@ -893,9 +940,13 @@ class SimulationRunner:
         twitter_log = os.path.join(sim_dir, "twitter", "actions.jsonl")
         reddit_log = os.path.join(sim_dir, "reddit", "actions.jsonl")
         
-        # 检查哪些平台被启用（通过文件是否存在判断）
-        twitter_enabled = os.path.exists(twitter_log)
-        reddit_enabled = os.path.exists(reddit_log)
+        # A configured platform may still be starting and have no log yet.
+        twitter_enabled = (
+            state.twitter_running or state.twitter_completed or os.path.exists(twitter_log)
+        )
+        reddit_enabled = (
+            state.reddit_running or state.reddit_completed or os.path.exists(reddit_log)
+        )
         
         # 如果平台被启用但未完成，则返回 False
         if twitter_enabled and not state.twitter_completed:
@@ -980,6 +1031,12 @@ class SimulationRunner:
                     RunnerStatus.FAILED,
                 }
             )
+            process = cls._processes.get(simulation_id)
+            completed_environment_alive = (
+                state.runner_status == RunnerStatus.COMPLETED
+                and process is not None
+                and process.poll() is None
+            )
             if (
                 state.runner_status not in [
                     RunnerStatus.STARTING,
@@ -988,6 +1045,7 @@ class SimulationRunner:
                     RunnerStatus.STOPPING,
                 ]
                 and not retrying_finalization
+                and not completed_environment_alive
             ):
                 raise ValueError(
                     f"模拟未在运行: {simulation_id}, status={state.runner_status}"
