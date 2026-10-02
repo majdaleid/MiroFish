@@ -1606,7 +1606,8 @@ def start_simulation():
                 run_state = SimulationRunner.get_run_state(simulation_id)
                 updater = ZepGraphMemoryManager.get_updater(simulation_id)
                 needs_finalization = bool(
-                    run_state
+                    simulation_id in SimulationRunner.get_running_simulations()
+                    or run_state
                     and run_state.runner_status in {
                         RunnerStatus.RUNNING,
                         RunnerStatus.PAUSED,
