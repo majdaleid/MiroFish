@@ -39,6 +39,7 @@ def make_agent():
     agent.simulation_id = 'test_simulation'
     agent.simulation_requirement = 'Analyze demand for a digital calculator in Germany.'
     agent.report_logger = None
+    agent.tools = {}
     agent.zep_tools = Mock()
     agent.zep_tools.get_simulation_context.return_value = {}
     agent.llm = Mock()
