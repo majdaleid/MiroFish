@@ -39,6 +39,9 @@ def create_chat_completion(
         "model": model,
         "messages": messages,
     }
+    if model == 'deepseek-flash':
+        # CAMEL's existing tool conversation does not replay reasoning_content.
+        kwargs['extra_body'] = {'thinking': {'type': 'disabled'}}
 
     if response_format is not None:
         kwargs["response_format"] = response_format

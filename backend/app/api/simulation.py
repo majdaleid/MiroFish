@@ -21,6 +21,7 @@ from ..services.simulation_runner import (
 from ..services.zep_graph_memory_updater import ZepGraphMemoryManager
 from ..utils.logger import get_logger
 from ..utils.locale import t, get_locale, set_locale
+from ..utils.llm_settings import get_llm_provider, set_llm_provider
 from ..utils.zep_lifecycle import get_graph_readers, graph_lifecycle_lock
 from ..models.project import ProjectManager
 
@@ -533,10 +534,12 @@ def prepare_simulation():
         
         # Capture locale before spawning background thread
         current_locale = get_locale()
+        current_provider = get_llm_provider()
 
         # 定义后台任务
         def run_prepare():
             set_locale(current_locale)
+            set_llm_provider(current_provider)
             try:
                 task_manager.update_task(
                     task_id,

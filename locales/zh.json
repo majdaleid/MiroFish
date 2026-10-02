@@ -1,4 +1,13 @@
 {
+  "model": {
+    "label": "模型",
+    "default": "当前默认配置",
+    "newWork": "应用于新请求和任务，已运行的任务保持原模型。",
+    "addKey": "要启用 DeepSeek，请添加 Codespaces 密钥",
+    "secrets": "打开 Codespaces 密钥设置",
+    "restart": "授权 majdaleid/MiroFish，重启后端后刷新页面。",
+    "loadError": "无法加载模型设置，请重新打开此菜单重试。"
+  },
   "common": {
     "confirm": "确认",
     "cancel": "取消",

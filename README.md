@@ -1,5 +1,7 @@
 This fork adds **Arabic UI and Arabic generated output**, with RTL support. See [Arabic and Codespaces setup](docs/ARABIC.md). Upstream project: [666ghj/MiroFish](https://github.com/666ghj/MiroFish).
 
+Use the **Model** menu for optional [DeepSeek V4.1 Flash](docs/DEEPSEEK.md); the current default stays unchanged.
+
 <div align="center">
 
 <img src="./static/image/MiroFish_logo_compressed.jpeg" alt="MiroFish Logo" width="75%"/>

@@ -9,7 +9,7 @@ import re
 from typing import Optional, Dict, Any, List
 from openai import OpenAI
 
-from ..config import Config
+from .llm_settings import get_llm_settings
 from .openai_chat_compat import create_chat_completion, extract_chat_completion_text
 
 
@@ -97,9 +97,10 @@ class LLMClient:
         base_url: Optional[str] = None,
         model: Optional[str] = None
     ):
-        self.api_key = api_key or Config.LLM_API_KEY
-        self.base_url = base_url or Config.LLM_BASE_URL
-        self.model = model or Config.LLM_MODEL_NAME
+        settings = get_llm_settings()
+        self.api_key = api_key or settings.api_key
+        self.base_url = base_url or settings.base_url
+        self.model = model or settings.model
         
         if not self.api_key:
             raise ValueError("LLM_API_KEY 未配置")

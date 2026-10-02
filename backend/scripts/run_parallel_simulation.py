@@ -1036,6 +1036,7 @@ def create_model(config: Dict[str, Any], use_boost: bool = False):
     return ModelFactory.create(
         model_platform=ModelPlatformType.OPENAI,
         model_type=llm_model,
+        **({'model_config_dict': {'reasoning_effort': 'none'}} if llm_model == 'deepseek-flash' else {}),
     )
 
 

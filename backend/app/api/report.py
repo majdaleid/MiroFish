@@ -18,6 +18,7 @@ from ..models.project import ProjectManager, ProjectStatus
 from ..models.task import TaskManager, TaskStatus
 from ..utils.logger import get_logger
 from ..utils.locale import t, get_locale, set_locale
+from ..utils.llm_settings import get_llm_provider, set_llm_provider
 from ..utils.zep_lifecycle import (
     graph_lifecycle_lock,
     register_graph_reader,
@@ -240,10 +241,12 @@ def generate_report():
                 }
             )
             current_locale = get_locale()
+            current_provider = get_llm_provider()
             register_graph_reader(graph_id, report_id)
 
             def run_generate():
                 set_locale(current_locale)
+                set_llm_provider(current_provider)
                 try:
                     task_manager.update_task(
                         task_id,

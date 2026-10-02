@@ -1,4 +1,13 @@
 {
+  "model": {
+    "label": "Model",
+    "default": "Current default",
+    "newWork": "Applies to new requests and jobs. Existing jobs keep their model.",
+    "addKey": "To enable DeepSeek, add the Codespaces secret",
+    "secrets": "Open Codespaces secrets",
+    "restart": "Grant access to majdaleid/MiroFish, restart the backend, then refresh this page.",
+    "loadError": "Could not load model settings. Reopen this menu to retry."
+  },
   "common": {
     "confirm": "Confirm",
     "cancel": "Cancel",
