@@ -21,6 +21,7 @@ from openai import OpenAI
 from ..config import Config
 from ..utils.logger import get_logger
 from ..utils.locale import get_language_instruction, t
+from ..utils.llm_settings import get_llm_settings
 from ..utils.openai_chat_compat import create_chat_completion, extract_chat_completion_text
 from .zep_entity_reader import EntityNode, ZepEntityReader
 
@@ -229,7 +230,6 @@ class SimulationConfigGenerator:
         base_url: Optional[str] = None,
         model_name: Optional[str] = None
     ):
-        from ..utils.llm_settings import get_llm_settings
         settings = get_llm_settings()
         self.api_key = api_key or settings.api_key
         self.base_url = base_url or settings.base_url
