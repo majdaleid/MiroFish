@@ -398,7 +398,7 @@ const doStartSimulation = async () => {
     const params = {
       simulation_id: props.simulationId,
       platform: 'parallel',
-      force: true,  // 强制重新开始
+      force: false,
       enable_graph_memory_update: true  // 开启动态图谱更新
     }
     
@@ -688,10 +688,29 @@ watch(() => props.systemLogs?.length, () => {
   })
 })
 
-onMounted(() => {
+onMounted(async () => {
   addLog(t('log.step3Init'))
-  if (props.simulationId) {
-    doStartSimulation()
+  if (!props.simulationId) return
+  try {
+    const existing = await getRunStatus(props.simulationId)
+    if (!existing.success || !existing.data) {
+      throw new Error(existing.error || t('common.unknownError'))
+    }
+    if (existing.data.runner_status === 'idle') {
+      await doStartSimulation()
+      return
+    }
+    // Reopening this page observes the existing run, including completed runs.
+    // Never clear its logs or restart its agents as a side effect of mounting.
+    phase.value = 1
+    startStatusPolling()
+    startDetailPolling()
+    await fetchRunStatus()
+    await fetchRunStatusDetail()
+  } catch (err) {
+    startError.value = err.message
+    addLog(t('log.startException', { error: err.message }))
+    emit('update-status', 'error')
   }
 })
 

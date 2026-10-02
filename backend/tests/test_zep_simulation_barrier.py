@@ -312,7 +312,8 @@ def test_simulation_start_rejects_string_booleans(field):
     assert "JSON boolean" in response.get_json()["error"]
 
 
-def test_force_restart_does_not_continue_while_old_ingestion_is_pending(monkeypatch):
+@pytest.mark.parametrize("runner_status", [RunnerStatus.STOPPING, RunnerStatus.COMPLETED])
+def test_force_restart_does_not_continue_while_old_ingestion_is_pending(monkeypatch, runner_status):
     simulation = SimpleNamespace(
         simulation_id="sim-1",
         project_id="proj-1",
@@ -338,9 +339,14 @@ def test_force_restart_does_not_continue_while_old_ingestion_is_pending(monkeypa
         "get_run_state",
         classmethod(
             lambda _cls, _simulation_id: SimpleNamespace(
-                runner_status=RunnerStatus.STOPPING
+                runner_status=runner_status
             )
         ),
+    )
+    monkeypatch.setattr(
+        simulation_api.SimulationRunner,
+        "get_running_simulations",
+        classmethod(lambda _cls: ["sim-1"] if runner_status == RunnerStatus.COMPLETED else []),
     )
     monkeypatch.setattr(
         simulation_api.SimulationRunner,
