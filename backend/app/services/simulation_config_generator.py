@@ -229,9 +229,11 @@ class SimulationConfigGenerator:
         base_url: Optional[str] = None,
         model_name: Optional[str] = None
     ):
-        self.api_key = api_key or Config.LLM_API_KEY
-        self.base_url = base_url or Config.LLM_BASE_URL
-        self.model_name = model_name or Config.LLM_MODEL_NAME
+        from ..utils.llm_settings import get_llm_settings
+        settings = get_llm_settings()
+        self.api_key = api_key or settings.api_key
+        self.base_url = base_url or settings.base_url
+        self.model_name = model_name or settings.model
         
         if not self.api_key:
             raise ValueError("LLM_API_KEY 未配置")

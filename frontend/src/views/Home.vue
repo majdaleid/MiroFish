@@ -4,6 +4,7 @@
     <nav class="navbar">
       <div class="nav-brand">MIROFISH</div>
       <div class="nav-links">
+        <ModelSwitcher />
         <LanguageSwitcher />
         <a href="https://github.com/majdaleid/MiroFish" target="_blank" class="github-link">
           {{ $t('nav.visitGithub') }} <span class="arrow">↗</span>
@@ -216,6 +217,7 @@ import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import HistoryDatabase from '../components/HistoryDatabase.vue'
 import LanguageSwitcher from '../components/LanguageSwitcher.vue'
+import ModelSwitcher from '../components/ModelSwitcher.vue'
 
 const router = useRouter()
 

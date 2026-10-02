@@ -9,7 +9,7 @@ import warnings
 # 需要在所有其他导入之前设置
 warnings.filterwarnings("ignore", message=".*resource_tracker.*")
 
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 from .config import Config
@@ -50,6 +50,15 @@ def create_app(config_class=Config):
     
     # 请求日志中间件
     @app.before_request
+    def validate_llm_provider():
+        if request.path.startswith('/api/') and request.path != '/api/llm/providers' and request.method != 'OPTIONS':
+            from .utils.llm_settings import get_llm_settings
+            try:
+                get_llm_settings()
+            except ValueError as error:
+                return jsonify(success=False, error=str(error)), 400
+
+    @app.before_request
     def log_request():
         logger = get_logger('mirofish.request')
         logger.debug(f"请求: {request.method} {request.path}")
@@ -69,6 +78,15 @@ def create_app(config_class=Config):
     app.register_blueprint(report_bp, url_prefix='/api/report')
     
     # 健康检查
+    @app.get('/api/llm/providers')
+    def llm_providers():
+        from .utils.llm_settings import DEEPSEEK_MODEL
+        return jsonify(success=True, data={
+            'default_model': Config.LLM_MODEL_NAME,
+            'deepseek_model': DEEPSEEK_MODEL,
+            'deepseek_configured': bool(Config.DEEPSEEK_API_KEY),
+        })
+
     @app.route('/health')
     def health():
         return {'status': 'ok', 'service': 'MiroFish Backend'}

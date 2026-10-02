@@ -466,6 +466,7 @@ class RedditSimulationRunner:
         return ModelFactory.create(
             model_platform=ModelPlatformType.OPENAI,
             model_type=llm_model,
+            **({'model_config_dict': {'reasoning_effort': 'none'}} if llm_model == 'deepseek-flash' else {}),
         )
     
     def _get_active_agents_for_round(

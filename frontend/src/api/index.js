@@ -1,5 +1,6 @@
 import axios from 'axios'
 import i18n from '../i18n'
+import { llmProvider } from '../store/llmProvider'
 
 // 创建axios实例
 const service = axios.create({
@@ -14,6 +15,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     config.headers['Accept-Language'] = i18n.global.locale.value
+    config.headers['X-MiroFish-Provider'] = llmProvider.value
     return config
   },
   error => {
